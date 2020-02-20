@@ -1,0 +1,1 @@
+class UsersTeam < ApplicationRecord; end
