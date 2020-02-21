@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   validates :name, presence: true
   validates :address, presence: true
-  validates :gender, presence: true
+  validates :gender, presence: true,
+                 numericality: { less_than: 4, greater_than: 0 }
   validates :phone_number,:presence => true,
                  :numericality => true,
                  :length => { is: 10 }
@@ -20,4 +21,7 @@ class User < ApplicationRecord
 	# scope :sex -> {
   # }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  scope :male, -> { where(gender: 1) }
+  scope :female, -> { where(gender: 2) }
+  scope :unknown, -> { where(gender: 3) }
 end
