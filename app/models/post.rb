@@ -5,5 +5,5 @@ class Post < ApplicationRecord
   validates :comments_count, presence: true
 	belongs_to :user
 	# Từ bài post lấy ra được những comments của bài post đó
-	has_many :comments
+	has_many :comments, dependent: :destroy
 end

@@ -6,9 +6,14 @@ class Comment < ApplicationRecord
   belongs_to :post
   
   after_save :increment_comments_count
+  before_destroy :decrement_comments_count
 
   def increment_comments_count
     User.find(self.user_id).increment!(:comments_count)
     Post.find(self.post_id).increment!(:comments_count)
+  end
+
+  def decrement_comments_count
+    User.find(self.user_id).decrement!(:comments_count)
   end
 end
