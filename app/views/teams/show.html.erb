@@ -1,0 +1,33 @@
+<% if @team %>
+  <h1><%= @team.name %></h1>
+  <% if @team.users.any? %>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Address</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @team.users.each_with_index do |user, index| %>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.address %></td>
+            <td><%= user.gender %></td>
+            <td>@fat</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <h3>Team have not user</h3>
+  <% end %>
+<% else %>
+  <h1>Some thing wrong</h1>
+<% end %>

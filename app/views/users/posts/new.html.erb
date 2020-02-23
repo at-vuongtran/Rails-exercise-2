@@ -1,0 +1,11 @@
+<h1>Create Post</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= bootstrap_form_for(@post) do |f| %>
+      <%= f.text_field :title %>
+      <%= f.email_field :content %>
+      <%= f.submit "Create a team", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

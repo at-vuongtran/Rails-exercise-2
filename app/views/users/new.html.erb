@@ -1,0 +1,14 @@
+<h1>Create User</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= bootstrap_form_for(@user) do |f| %>
+      <%= f.text_field :name %>
+      <%= f.email_field :email %>
+      <%= f.text_field :address %>
+      <%= f.text_field :phone_number %>
+      <%= f.number_field :gender %>
+      <%= f.submit "Create a user", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
