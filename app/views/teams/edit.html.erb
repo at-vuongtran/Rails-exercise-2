@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= bootstrap_form_for(@team) do |f| %>
+      <%= f.text_field :name %>
       <%= f.number_field :leader_id %>
       <%= f.submit "Update", class: "btn btn-primary" %>
     <% end %>

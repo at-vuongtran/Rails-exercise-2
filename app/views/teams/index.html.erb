@@ -6,7 +6,8 @@
         <th scope="col">#</th>
         <th scope="col">Team</th>
         <th scope="col">Leader</th>
-        <th scope="col">Action</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Remove</th>
       </tr>
     </thead>
     <tbody>
@@ -15,11 +16,14 @@
           <th scope="row"><%= index + 1 %></th>
           <td><%= team.name %></td>
           <td><%= team.leader.name %></td>
-          <td>@fat</td>
+          <td><%= link_to 'Update', edit_team_path(team) %></td>
+          <td><%= link_to 'Delete', team, method: :delete,
+                                     data: { confirm: "Are you sure?" } %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+  <%= will_paginate %>
 <% elsif %>
   <%= link_to 'Create a team', new_team_url %>
 <% end %>

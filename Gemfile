@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap-sass', '> 3.3.7'
 gem "bootstrap_form", "~> 4.0"
+gem 'will_paginate',           '>= 3.1.6', :require => nil
+gem 'bootstrap-will_paginate', '>= 1.0.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
