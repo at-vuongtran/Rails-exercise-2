@@ -1,4 +1,6 @@
-<% if @posts.any? %>
+<% if @posts.nil? %>
+  Can't not find User, Action don't permit
+<% elsif @posts.any? %>
   <h1>All Posts</h1>
   <table class="table table-hover">
     <thead>

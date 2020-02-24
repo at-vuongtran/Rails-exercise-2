@@ -22,6 +22,10 @@
   <p>
     Leader: <%= @user.leaders.any? ? leaders.pluck(:name).join(', ') : 'Empty' %>
   </p>
+  <p>
+    debugger
+    Posts: <%= @user.posts.size %>. <%= link_to 'See Posts', user_posts_path(@user) %>
+  </p>
   <%= link_to "Update", edit_user_path(@user) %>
 <% else %>
   <h1>Some thing wrong</h1>

@@ -1,7 +1,11 @@
 class PostsController < ApplicationController
   def index
     if params[:user_id]
-      @posts = User.find(params[:user_id]).posts.paginate(page: params[:page], per_page: 2)
+      begin
+        @posts = User.find(params[:user_id]).posts.paginate(page: params[:page], per_page: 2)
+      rescue => exception
+        @posts = nil
+      end
     else
       @posts = Post.paginate(page: params[:page], per_page: 2)
     end
@@ -44,6 +48,6 @@ class PostsController < ApplicationController
 
   private
     def post_params
-      params.require(:post).permit(:name, :email, :gender, :address, :phone_number, :comments_count)
+      params.require(:post).permit(:user_id, :title, :content, :comments_count)
     end
 end

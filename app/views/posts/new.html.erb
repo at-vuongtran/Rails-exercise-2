@@ -1,11 +1,16 @@
 <h1>Create Post</h1>
-
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= bootstrap_form_for(@post) do |f| %>
-      <%= f.text_field :title %>
-      <%= f.email_field :content %>
-      <%= f.submit "Create a team", class: "btn btn-primary" %>
-    <% end %>
+<% if logged_in? %>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= bootstrap_form_for(@post) do |f| %>
+        <%= f.text_field :title %>
+        <%= f.text_field :content %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :comments_count, value: 0 %>
+        <%= f.submit "Post", class: "btn btn-primary" %>
+      <% end %>
+    </div>
   </div>
-</div>
+<% elsif %>
+  Please <%= link_to 'login', login_path %> to create a post
+<% end %>

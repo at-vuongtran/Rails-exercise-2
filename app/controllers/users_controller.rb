@@ -9,7 +9,11 @@ class UsersController < ApplicationController
 
   def show
     if logged_in?
-      @user = User.includes(:teams_users, :teams).find(params[:id])
+      begin
+        @user = User.includes(:teams_users, :teams).find(params[:id])
+      rescue
+        @user = nil
+      end
     else
       redirect_to login_path
     end

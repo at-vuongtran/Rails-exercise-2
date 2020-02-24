@@ -1,16 +1,4 @@
 class CommentsController < ApplicationController
-  def index
-    @posts = Comment.paginate(page: params[:page], per_page: 2)
-  end
-
-  def show
-    @comment = Comment.find(params[:id])
-  end
-
-  def new
-    @comment = Comment.new
-  end
-
   def create
     @comment = Comment.new(comment_params)
     @comment.save
@@ -25,14 +13,18 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     if @comment.update_attributes(comment_params)
-      redirect_to comment_path(@comment)
+      post = @comment.post
+      redirect_to post
     else
       render 'edit'
     end
   end
 
   def destroy
-    Comment.find(params[:id]).destroy!
+    @comment = Comment.find(params[:id])
+    post = @comment.post
+    @comment.destroy!
+    redirect_to post
   end
 
   private
