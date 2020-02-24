@@ -1,6 +1,10 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.paginate(page: params[:page], per_page: 2)
+    if params[:user_id]
+      @posts = User.find(params[:user_id]).posts.paginate(page: params[:page], per_page: 2)
+    else
+      @posts = Post.paginate(page: params[:page], per_page: 2)
+    end
   end
 
   def show
@@ -38,7 +42,6 @@ class PostsController < ApplicationController
   end
 
   private
-
     def post_params
       params.require(:post).permit(:name, :email, :gender, :address, :phone_number, :comments_count)
     end

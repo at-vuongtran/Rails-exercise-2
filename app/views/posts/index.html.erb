@@ -1,0 +1,35 @@
+<% if @posts.any? %>
+  <h1>All Posts</h1>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Content</th>
+        <th scope="col">Comment</th>
+        <th scope="col">Views</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @posts.each_with_index do |post, index| %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= post.title %></td>
+          <td><%= post.content %></td>
+          <td><%= post.comments_count %></td>
+          <td><%= link_to 'Detail', post_path(post) %></td>
+          <% if post.user_id == current_user.id %>
+            <td><%= link_to 'Update', edit_post_path(post) %></td>
+            <td><%= link_to 'Delete', post, method: :delete,
+                                      data: { confirm: "Are you sure?" } %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate %>
+<% elsif %>
+  Empty post
+<% end %>

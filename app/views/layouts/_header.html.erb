@@ -8,6 +8,23 @@
         <li class="active"><a href="/teams">Teams</a></li>
         <li><a href="/users">Users</a></li>
         <li><a href="/posts">Post</a></li>
+        <% if logged_in? %>
+          <li class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Account
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Profile", current_user %></li>
+              <li><%= link_to "Settings", '#' %></li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to "Log out", logout_path, method: :delete %>
+              </li>
+            </ul>
+          </li>
+        <% else %>
+          <li><%= link_to "Log in", login_path %></li>
+        <% end %>
       </ul>
       <form class="navbar-form navbar-left" action="/action_page.php">
         <div class="input-group">
