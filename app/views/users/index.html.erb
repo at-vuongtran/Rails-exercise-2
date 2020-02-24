@@ -1,0 +1,35 @@
+<% if @users.any? %>
+  <h1>All Users</h1>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Address</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each_with_index do |user, index| %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.address %></td>
+          <td><%= user.gender %></td>
+          <td><%= user.phone_number %></td>
+          <td><%= link_to 'Update', edit_user_path(user) %></td>
+          <td><%= link_to 'Delete', user, method: :delete,
+                                     data: { confirm: "Are you sure?" } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate %>
+<% elsif %>
+  <%= link_to 'Create a user', new_user_url %>
+<% end %>
