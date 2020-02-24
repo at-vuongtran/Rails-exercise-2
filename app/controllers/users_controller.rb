@@ -1,10 +1,18 @@
 class UsersController < ApplicationController
   def index
-    @users = User.paginate(page: params[:page], per_page: 2)
+    if logged_in?
+      @users = User.paginate(page: params[:page], per_page: 2)
+    else
+      redirect_to login_path
+    end
   end
 
   def show
-    @user = User.includes(:teams_users, :teams).find(params[:id])
+    if logged_in?
+      @user = User.includes(:teams_users, :teams).find(params[:id])
+    else
+      redirect_to login_path
+    end
   end
 
   def new
@@ -22,7 +30,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    if logged_in?
+      @user = User.find(params[:id])
+    else
+      redirect_to login_path
+    end
   end
 
   def update
@@ -35,7 +47,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    user.find(params[:id]).destroy!
+    User.find(params[:id]).destroy!
   end
 
   private

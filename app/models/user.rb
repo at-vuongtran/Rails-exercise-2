@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  enum gender: { male: 1, female: 2, unknown: 3 }
   validates :name, presence: true
   validates :address, presence: true
   validates :gender, presence: true,
@@ -20,7 +21,7 @@ class User < ApplicationRecord
   has_many :leaders, through: :teams, source: :leader
   
   validates :email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  scope :male, -> { where(gender: 1) }
-  scope :female, -> { where(gender: 2) }
-  scope :unknown, -> { where(gender: 3) }
+  scope :male, -> { where(gender: :male) }
+  scope :female, -> { where(gender: :female) }
+  scope :unknown, -> { where(gender: :unknown) }
 end

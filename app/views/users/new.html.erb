@@ -8,6 +8,7 @@
       <%= f.text_field :address %>
       <%= f.text_field :phone_number %>
       <%= f.number_field :gender %>
+      <%= f.hidden_field :comments_count, value: 0 %>
       <%= f.submit "Create a user", class: "btn btn-primary" %>
     <% end %>
   </div>

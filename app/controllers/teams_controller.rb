@@ -1,14 +1,26 @@
 class TeamsController < ApplicationController
   def index
-    @teams = Team.paginate(page: params[:page], per_page: 2)
+    if logged_in?
+      @teams = Team.paginate(page: params[:page], per_page: 2)
+    else
+      redirect_to login_path
+    end
   end
 
   def show
-    @team = Team.includes(:users).find(params[:id])
+    if logged_in?
+      @team = Team.includes(:users).find(params[:id])
+    else
+      redirect_to login_path
+    end
   end
 
   def new
-    @team = Team.new
+    if logged_in?
+      @team = Team.new
+    else
+      redirect_to login_path
+    end
   end
 
   def create
@@ -21,13 +33,18 @@ class TeamsController < ApplicationController
   end
 
   def edit
-    @team = Team.find(params[:id])
+    if logged_in?
+      @team = Team.find(params[:id])
+    else
+      redirect_to login_path
+    end
   end
 
   def update
     @team = Team.find(params[:id])
     if @team.update_attributes(team_params)
       # Handle a successful update.
+      render @team
     else
       render 'edit'
     end

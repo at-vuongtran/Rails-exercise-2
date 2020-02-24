@@ -12,12 +12,10 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(post_params)
-    if @comment.save
-      redirect_to comment_path(@comment)
-    else
-      render 'new'
-    end
+    @comment = Comment.new(comment_params)
+    @comment.save
+    post = Post.find(@comment.post_id)
+    redirect_to post_path(post)
   end
 
   def edit
@@ -40,6 +38,6 @@ class CommentsController < ApplicationController
   private
 
     def comment_params
-      params.require(:comment).permit(:name, :email, :gender, :address, :phone_number, :comments_count)
+      params.require(:comment).permit(:user_id, :post_id, :content)
     end
 end
