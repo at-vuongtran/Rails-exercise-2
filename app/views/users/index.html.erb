@@ -1,5 +1,10 @@
 <% if @users.any? %>
   <h1>All Users</h1>
+  <%= form_tag users_path, method: "get" do %>
+    <%= label_tag(:search, "Enter a name:") %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag("Search", name: nil) %>
+  <% end %>
   <table class="table table-hover">
     <thead>
       <tr>

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def index
     if logged_in?
-      @users = User.paginate(page: params[:page], per_page: 2)
+      @users = User.search(params[:search]).paginate(page: params[:page], per_page: 5)
     else
       redirect_to login_path
     end
@@ -55,8 +55,7 @@ class UsersController < ApplicationController
   end
 
   private
-
     def user_params
-      params.require(:user).permit(:name, :email, :gender, :address, :phone_number, :comments_count)
+      params.require(:user).permit(:name, :email, :gender, :address, :phone_number, :comments_count, :search)
     end
 end

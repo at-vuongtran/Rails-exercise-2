@@ -24,4 +24,12 @@ class User < ApplicationRecord
   scope :male, -> { where(gender: :male) }
   scope :female, -> { where(gender: :female) }
   scope :unknown, -> { where(gender: :unknown) }
+  
+  def self.search(search)
+    if(search)
+      User.where("name LIKE '%#{search}%'")
+    else
+      User.all
+    end
+  end
 end
