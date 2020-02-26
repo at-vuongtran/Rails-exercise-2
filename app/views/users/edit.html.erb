@@ -4,7 +4,9 @@
       <%= f.text_field :name %>
       <%= f.email_field :email %>
       <%= f.text_field :address %>
-      <%= f.number_field :gender %>
+      <%= f.radio_button :gender, 'male' %>
+      <%= f.radio_button :gender, 'female' %>
+      <%= f.radio_button :gender, 'unknown' %>
       <%= f.number_field :phone_number %>
       <%= f.submit "Update", class: "btn btn-primary" %>
     <% end %>

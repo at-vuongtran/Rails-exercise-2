@@ -2,6 +2,7 @@
   Can't not find User, Action don't permit
 <% elsif @posts.any? %>
   <h1>All Posts</h1>
+  <%= link_to "Create a post!", new_post_path %>
   <table class="table table-hover">
     <thead>
       <tr>

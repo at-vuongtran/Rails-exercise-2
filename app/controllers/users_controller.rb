@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  GENDER = { 'male' => 1, 'female' => 2, 'unknown' => 3}
+
   def index
     if logged_in?
       @users = User.search(params[:search]).paginate(page: params[:page], per_page: 5)
@@ -24,9 +26,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    tmp = user_params
+    tmp[:gender] = GENDER[tmp[:gender]]
+    @user = User.new(tmp)
     if @user.save
       log_in @user
+      flash[:notice] = "Welcome to my website"
       redirect_to user_path(@user)
     else
       render 'new'
@@ -43,7 +48,10 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
+    tmp = user_params
+    tmp[:gender] = GENDER[tmp[:gender]]
+    if @user.update_attributes(tmp)
+      flash[:notice] = "Update success!"
       redirect_to user_path(@user)
     else
       render 'edit'

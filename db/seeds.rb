@@ -1,3 +1,3 @@
 100.times do |n|
-  Post.create(user_id: n % 5 + 4, title: "title #{n}", content: "content for title #{n}", comments_count: 0 )
+  Comment.create!(user_id: rand(99), post_id: rand(100), content: "comment number: #{ n + 1 }")
 end

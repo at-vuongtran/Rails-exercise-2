@@ -12,7 +12,11 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    begin
+      @post = Post.find(params[:id])
+    rescue => exception
+      @post = nil
+    end
     @comment = Comment.new
   end
 
@@ -23,6 +27,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
+      flash[:notice] = "Your post has just been created!"
       redirect_to post_path(@post)
     else
       render 'new'
@@ -36,6 +41,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update_attributes(post_params)
+      flash[:notice] = "Updated"
       redirect_to post_path(@post)
     else
       render 'edit'

@@ -7,7 +7,9 @@
       <%= f.email_field :email %>
       <%= f.text_field :address %>
       <%= f.text_field :phone_number %>
-      <%= f.number_field :gender %>
+      <%= f.radio_button :gender, 'male' %>
+      <%= f.radio_button :gender, 'female' %>
+      <%= f.radio_button :gender, 'unknown' %>
       <%= f.hidden_field :comments_count, value: 0 %>
       <%= f.submit "Create a user", class: "btn btn-primary" %>
     <% end %>

@@ -1,9 +1,14 @@
 class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
-    @comment.save
     post = Post.find(@comment.post_id)
-    redirect_to post_path(post)
+    if @comment.save
+      flash[:notice] = "Your comment has been public"
+      redirect_to post_path(post)
+    else
+      flash[:notice] = "Comment is empty"
+      redirect_to post_path(post)
+    end
   end
 
   def edit
@@ -14,6 +19,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     if @comment.update_attributes(comment_params)
       post = @comment.post
+      flash[:notice] = "Updated!"
       redirect_to post
     else
       render 'edit'
@@ -21,10 +27,15 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
-    post = @comment.post
-    @comment.destroy!
-    redirect_to post
+    begin
+      @comment = Comment.find(params[:id])
+      post = @comment.post
+      @comment.destroy!
+      flash[:notice] = "You have just delete a comment"
+      redirect_to post
+    rescue => exception
+      
+    end
   end
 
   private

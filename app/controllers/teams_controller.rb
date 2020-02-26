@@ -26,6 +26,7 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
     if @team.save
+      flash[:notice] = 'Created a team successfuly'
       redirect_to team_path(@team)
     else
       render 'new'
@@ -44,14 +45,22 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     if @team.update_attributes(team_params)
       # Handle a successful update.
-      render @team
+      flash[:notice] = 'Update success'
+      redirect_to @team
     else
       render 'edit'
     end
   end
 
   def destroy
-    Team.find(params[:id]).destroy!
+    begin
+      Team.find(params[:id]).destroy!
+      flash[:notice] = "You have just delete a team"
+      redirect_to teams_path
+    rescue => exception
+      flash[:notice] = "Can not delete team"
+      redirect_to teams_path
+    end
   end
   private
 
