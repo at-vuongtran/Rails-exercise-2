@@ -2,12 +2,12 @@ class PostsController < ApplicationController
   def index
     if params[:user_id]
       begin
-        @posts = User.find(params[:user_id]).posts.paginate(page: params[:page], per_page: 2)
+        @posts = User.find(params[:user_id]).posts.paginate(page: params[:page], per_page: 5)
       rescue => exception
         @posts = nil
       end
     else
-      @posts = Post.search(params[:search]).paginate(page: params[:page], per_page: 2)
+      @posts = Post.search(params[:search]).paginate(page: params[:page], per_page: 5)
     end
   end
 

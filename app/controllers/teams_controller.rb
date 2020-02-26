@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
   def index
     if logged_in?
-      @teams = Team.search(params[:search]).paginate(page: params[:page], per_page: 2)
+      @teams = Team.search(params[:search]).paginate(page: params[:page], per_page: 4)
     else
       redirect_to login_path
     end
@@ -9,7 +9,11 @@ class TeamsController < ApplicationController
 
   def show
     if logged_in?
-      @team = Team.includes(:users).find(params[:id])
+      begin
+        @team = Team.includes(:users).find(params[:id])
+      rescue => exception
+        @team = nil
+      end
     else
       redirect_to login_path
     end

@@ -27,5 +27,5 @@
   </p>
   <%= link_to "Update", edit_user_path(@user) %>
 <% else %>
-  <h1>Some thing wrong</h1>
+  <%= render 'layouts/error' %>
 <% end %>

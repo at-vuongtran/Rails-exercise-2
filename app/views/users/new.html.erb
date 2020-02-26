@@ -5,6 +5,7 @@
     <%= bootstrap_form_for(@user) do |f| %>
       <%= f.text_field :name %>
       <%= f.email_field :email %>
+      <%= f.password_field :password %>
       <%= f.text_field :address %>
       <%= f.text_field :phone_number %>
       <%= f.radio_button :gender, 'male' %>

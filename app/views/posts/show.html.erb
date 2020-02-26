@@ -34,5 +34,5 @@
     you must <%= link_to "Login", login_path %> to write a comment.
   <% end %>
 <% else %>
-  <h1>Page not found</h1>
+  <%= render 'layouts/error' %>
 <% end %>
