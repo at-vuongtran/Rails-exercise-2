@@ -6,4 +6,12 @@ class Post < ApplicationRecord
   belongs_to :user
   # Từ bài post lấy ra được những comments của bài post đó
   has_many :comments, dependent: :destroy
+
+  def self.search(search)
+    if(search)
+      Post.where("title LIKE '%#{search}%'")
+    else
+      Post.all
+    end
+  end
 end

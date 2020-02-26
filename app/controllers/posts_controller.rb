@@ -7,7 +7,7 @@ class PostsController < ApplicationController
         @posts = nil
       end
     else
-      @posts = Post.paginate(page: params[:page], per_page: 2)
+      @posts = Post.search(params[:search]).paginate(page: params[:page], per_page: 2)
     end
   end
 

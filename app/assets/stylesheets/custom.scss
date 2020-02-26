@@ -1,2 +1,15 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.post-detail {
+  width: 100%;
+  padding-bottom: 50px;
+  border-bottom: solid 1pt black;
+  .content {
+    font-size: 25px;
+  }
+}
+
+.list-comments {
+  border-bottom: solid 1pt black;
+}

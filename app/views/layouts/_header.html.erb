@@ -2,7 +2,7 @@
   <nav class="navbar">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Manager Employees</a>
+        <a class="navbar-brand" href="/">Manager Employees</a>
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="/teams">Teams</a></li>
@@ -14,7 +14,7 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><%= link_to "Profile", current_user %></li>
+              <li><%= link_to "Profile", user_path(current_user) %></li>
               <li><%= link_to "Settings", '#' %></li>
               <li class="divider"></li>
               <li>

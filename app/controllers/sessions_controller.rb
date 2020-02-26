@@ -11,15 +11,13 @@ class SessionsController < ApplicationController
       log_in user
       redirect_to user
     else
-      # Create an error message.
-      render 'new'
+      flash[:notice] = "Account or password incorrect!"
+      render :new
     end
   end
 
   def destroy
-    def log_out
-      log_out
-      redirect_to root_url
-    end
-  end
+    log_out
+    redirect_to login_path
+  end    
 end

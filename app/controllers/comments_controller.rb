@@ -1,13 +1,10 @@
 class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
-    post = Post.find(@comment.post_id)
     if @comment.save
-      flash[:notice] = "Your comment has been public"
-      redirect_to post_path(post)
+      render json: { comment: @comment, user: @comment.user, post: @comment.post }
     else
-      flash[:notice] = "Comment is empty"
-      redirect_to post_path(post)
+      render json: {data: "unsuccess"}
     end
   end
 
@@ -22,7 +19,7 @@ class CommentsController < ApplicationController
       flash[:notice] = "Updated!"
       redirect_to post
     else
-      render 'edit'
+      render :edit
     end
   end
 
@@ -39,7 +36,6 @@ class CommentsController < ApplicationController
   end
 
   private
-
     def comment_params
       params.require(:comment).permit(:user_id, :post_id, :content)
     end
