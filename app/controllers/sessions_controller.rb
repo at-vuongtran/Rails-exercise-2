@@ -7,17 +7,24 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.password == params[:session][:password]
+    if user && user.authenticate(params[:session][:password])
       log_in user
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_to user
     else
-      flash[:notice] = "Account or password incorrect!"
+      flash[:danger] = "Account or password incorrect!"
       render :new
     end
   end
 
   def destroy
-    log_out
+    log_out if logged_in?
     redirect_to login_path
-  end    
+  end
+
+  def remember(user)
+    user.remember
+    cookies.permanent.signed[:user_id] = user.id
+    cookies.permanent[:remember_token] = user.remember_token
+  end
 end

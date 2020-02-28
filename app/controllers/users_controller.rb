@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if logged_in?
       begin
         @user = User.includes(:teams_users, :teams).find(params[:id])
-      rescue
+      rescue => exception
         @user = nil
       end
     else
@@ -64,6 +64,6 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :email, :password, :gender, :address, :phone_number, :comments_count, :search)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :gender, :address, :phone_number, :comments_count, :search)
     end
 end

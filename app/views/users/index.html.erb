@@ -19,9 +19,9 @@
       </tr>
     </thead>
     <tbody>
-      <% @users.each_with_index do |user, index| %>
+      <% @users.each do |user| %>
         <tr>
-          <th scope="row"><%= index + 1 %></th>
+          <th scope="row"><%= gravatar_for(user) %></th>
           <td><%= user.name %></td>
           <td><%= user.email %></td>
           <td><%= user.address %></td>
